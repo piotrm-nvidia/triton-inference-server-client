@@ -190,6 +190,7 @@ class InferenceServerClient(InferenceServerClientBase):
         )
         self._pool = gevent.pool.Pool(max_greenlets)
         self._verbose = verbose
+        self._closed = False
 
     def __enter__(self):
         return self
@@ -198,13 +199,15 @@ class InferenceServerClient(InferenceServerClientBase):
         self.close()
 
     def __del__(self):
-        self.close()
+        if not self._closed:
+            self.close()
 
     def close(self):
         """Close the client. Any future calls to server
         will result in an Error.
 
         """
+        self._closed = True
         self._pool.join()
         self._client_stub.close()
 

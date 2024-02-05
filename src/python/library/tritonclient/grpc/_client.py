@@ -204,7 +204,7 @@ class InferenceServerClient(InferenceServerClientBase):
                 ("grpc.keepalive_timeout_ms", keepalive_options.keepalive_timeout_ms),
                 (
                     "grpc.keepalive_permit_without_calls",
-                    keepalive_options.keepalive_permit_without_calls,
+                    keepalRestore monkey patch for ModelClient ive_options.keepalive_permit_without_calls,
                 ),
                 (
                     "grpc.http2.max_pings_without_data",
